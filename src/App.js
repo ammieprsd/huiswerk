@@ -12,6 +12,12 @@ function App() {
     const [lastname, setLastname] = React.useState('');
     const [age, setAge] = React.useState('');
     const [postcode, setPostcode] = React.useState('');
+    const [delivery, setDelivery] = React.useState('');
+    const [timeframeAfternoon, setTimeframeAfternoon] = React.useState('Overdag');
+    const [timeframeEvening, setTimeframeEvening] = React.useState('Avond');
+    const [comments, setComments] = React.useState('');
+
+
 
 
     function Reset(){
@@ -20,7 +26,7 @@ function App() {
     }
 
     function HandleSubmit(e) {
-        console.log(countBanana, countAardbei, countApple, countKiwi, firstname, lastname, age, postcode)
+        console.log(countBanana, countAardbei, countApple, countKiwi, firstname, lastname, age, postcode, delivery, timeframeAfternoon, timeframeEvening, comments)
         e.preventDefault()
     }
 
@@ -152,19 +158,25 @@ function App() {
 
             <label htmlFor="field-delivery">
                 Bezorgfrequentie
-                <select name="delivery" id="field-delivery">
+                <select name="delivery"
+                        id="field-delivery"
+                        value={delivery}
+                        onChange={(e) => setDelivery(e.target.value)}
+                >
                     <option value="every week">elke week</option>
                     <option value="every other week">om de ene week</option>
                     <option value="every month">elke maand</option>
                 </select>
             </label>
 
+            {/*vragen over radiobutton*/}
             <label htmlFor="field-delivery-afternoon">
                 <input
                     type="radio"
                     name="options"
                     id="field-delivery-afternoon"
-                    // value="Overdag"
+                    value={timeframeAfternoon}
+                    onSelect={() => setTimeframeAfternoon(timeframeAfternoon)}
                 />
                 Overdag
             </label>
@@ -174,7 +186,8 @@ function App() {
                     type="radio"
                     name="options"
                     id="field-delivery-evening"
-                    // value="evening"
+                    value={timeframeEvening}
+                    onSelect={() => setTimeframeEvening(timeframeEvening)}
                 />
                 's Avonds
             </label>
@@ -185,7 +198,10 @@ function App() {
                     name="comments"
                     id="field-comments"
                     cols="30"
-                    rows="10">
+                    rows="10"
+                    value={comments}
+                    onChange={(e) => setComments(e.target.value)}
+                >
                 </textarea>
             </label>
 
